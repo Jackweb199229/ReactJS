@@ -1,0 +1,18 @@
+.card {
+  width: 250px;
+  height: auto  ;
+  background-color: #f9d4d4;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+  
+}
+
+.card p{
+    padding: 15px;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+    text-align: left;
+}
