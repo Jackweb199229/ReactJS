@@ -8,6 +8,7 @@ function App() {
     <div className="Parent">
       <Card />
       <Card />
+      <Card />
     </div>
   );
 }
