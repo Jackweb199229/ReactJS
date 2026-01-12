@@ -67,14 +67,24 @@ const jobOpenings = [
 
 function App() {
   return (
-    <div className="Parent">
-      {jobOpenings.map((job, index) => (
-        console.log(index),
-        <Card brandLogo={job.brandLogo} companyName={job.companyName} datePosted={job.datePosted} 
-        tag1={job.tag1} tag2={job.tag2} pay={job.pay} location={job.location} />
-      ))}
-
-    </div>
+    <>
+      <nav className="navbar">
+        <h1 className="navbar-title"> Top Tech Job Openings</h1>
+      </nav>
+      <div className="Parent">
+        {jobOpenings.map((job) => (
+          <Card
+            brandLogo={job.brandLogo}
+            companyName={job.companyName}
+            datePosted={job.datePosted}
+            tag1={job.tag1}
+            tag2={job.tag2}
+            pay={job.pay}
+            location={job.location}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 

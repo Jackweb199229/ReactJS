@@ -1,0 +1,22 @@
+
+
+.header{
+    background-color: #37d0f6;
+    overflow: hidden;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+    
+}
+
+.btn{
+    background: rgb(71, 28, 228);
+    width: 100px;
+    padding: 10px;
+    margin: 5px;
+    color: white;
+    border-radius: 5px;
+}
