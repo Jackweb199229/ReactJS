@@ -1,22 +1,34 @@
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
 
-  const [task, setTask] = useState([]);
-  const copyTask = [...task];
+
+
+  // ✅ 1. Page load → localStorage se SAFE tarike se data uthao
+ const [task, setTask] = useState(() => {
+  const savedTask = localStorage.getItem("notes");
+  return savedTask ? JSON.parse(savedTask) : [];
+});
+
+  // ✅ 2. Task change → localStorage me save
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(task));
+  }, [task]);
+
 
   const formSubmit = (e) => {
     e.preventDefault();
 
+    if (title === "" || detail === "") return;
+    setTask([...task, {id: Date.now(), title, detail }]);
+
     setTitle("");
     setDetail("");
-    console.log(task);
-
-    copyTask.push({ title, detail });
-    setTask(copyTask);
+ 
   };
 
   const deletNote = (idx)=>{
@@ -26,7 +38,7 @@ function App() {
   }
 
   return (
-    <div className="app text-white ">
+    <div className="app min-h-screen bg-black text-white ">
       <form
         onSubmit={(e) => {
           formSubmit(e);
@@ -41,9 +53,7 @@ function App() {
             placeholder="Enter Notes Heading"
             className="px-5  py-5 font-medium border-2 outline-none rounded "
             value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
+            onChange={(e) => setTitle(e.target.value) }
           />
           {/* 2nd input for detailed  */}
 
@@ -52,15 +62,12 @@ function App() {
             placeholder="Write Details"
             className="px-5 h-32 font-medium py-5 border-2 outline-none rounded "
             value={detail}
-            onChange={(e) => {
-              setDetail(e.target.value);
-            }}
+            onChange={(e) => setDetail(e.target.value) }
           />
           <button
             className="bg-white text-black h-10 outline-none px-5 py-2 
           rounded active:scale-95"
-          >
-            Submit
+          >  Submit
           </button>
         </div>
 
@@ -78,7 +85,7 @@ function App() {
                     onClick={()=>{
                       deletNote(idx)
                     }}
-                    class="absolute top-0 right-1 ri-chat-delete-fill text-white"
+                    className="absolute top-0 right-1 ri-chat-delete-fill text-white"
                 ></i>
 
                   <h3 className="text-center mt-9 leading-tight font-bold text-xl">
