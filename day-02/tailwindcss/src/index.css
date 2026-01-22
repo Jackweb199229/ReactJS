@@ -1,0 +1,23 @@
+
+#right::-webkit-scrollbar{
+    display: none;
+}
+
+.scroll-track {
+  animation: scroll-x 5s linear infinite;
+}
+.scroll-x {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+@keyframes scroll-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
