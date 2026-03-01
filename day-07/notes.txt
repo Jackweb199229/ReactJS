@@ -1,0 +1,193 @@
+import Statements
+import axios from "axios";
+import { useState } from "react";
+import Card from "./Component/Card";
+🔹 axios
+
+HTTP client library
+
+API call karne ke liye use hota hai
+
+axios.get(), axios.post() etc use hote hain
+
+🔹 useState
+
+React Hook
+
+Functional component me state manage karne ke liye
+
+🔹 Card
+
+Custom component
+
+Reusable UI block
+
+Props ke through data receive karega
+
+2️⃣ Functional Component
+const App = () => { }
+
+React function component
+
+JSX return karta hai
+
+Isme hooks use kar sakte hain
+
+3️⃣ State Management
+const [userData, setUserData] = useState([]);
+const [index, setIndex] = useState(1);
+🔹 userData
+
+Array state
+
+API se aaya hua data store karta hai
+
+🔹 index
+
+Current page number store karta hai
+
+Pagination ke liye use ho raha hai
+
+4️⃣ Async Function + API Call
+const getData = async () => {
+  const response = await axios.get(
+    "https://picsum.photos/v2/list?page=2&limit=10",
+  );
+  setUserData(response.data);
+};
+🔹 async/await
+
+Promise handle karne ka modern tarika
+
+await API ka result aane tak wait karta hai
+
+🔹 axios.get()
+
+GET request bhejta hai
+
+Response object return karta hai
+
+🔹 response.data
+
+Actual API data
+
+⚠ Important:
+Tum yaha page fix kar diye ho page=2
+Pagination sahi karne ke liye ye hona chahiye:
+
+`https://picsum.photos/v2/list?page=${index}&limit=10`
+5️⃣ Conditional Rendering
+let printUserData = "No Available User";
+
+if (userData.length > 0) {
+  printUserData = userData.map(function (elem, idx) {
+🔹 Conditional Rendering
+
+Agar data hai → map chalega
+
+Agar data nahi hai → default message
+
+6️⃣ map() Function
+userData.map((elem, idx) => {
+
+Array ke har item par loop
+
+Har item ke liye JSX return karta hai
+
+🔹 key={idx}
+
+React ko help karta hai list track karne me
+
+Better practice: key={elem.id}
+
+7️⃣ Props Passing
+<Card elem={elem} />
+
+Parent se child ko data bhejna
+
+Child component props.elem se access karega
+
+8️⃣ JSX Structure
+return (
+  <div>
+    <button>Get Data</button>
+    <div>{printUserData}</div>
+  </div>
+)
+
+JSX = JavaScript + HTML
+
+Rules:
+
+Class ke jagah className
+
+Ek hi parent element return hoga
+
+9️⃣ Tailwind CSS Classes
+
+Example:
+
+className="bg-black h-screen overflow-auto text-white"
+Common Classes Used:
+
+bg-black → background color
+
+h-screen → full height
+
+overflow-auto → scroll enable
+
+flex → flexbox
+
+gap-4 → spacing
+
+rounded → border radius
+
+active:scale-95 → click animation
+
+🔟 Event Handling
+onClick={getData}
+
+or
+
+onClick={() => { setIndex(index + 1) }}
+🔹 Arrow function use hota hai jab:
+
+Multiple statements execute karne ho
+
+Parameter pass karna ho
+
+1️⃣1️⃣ Pagination Logic
+🔹 Prev Button
+if (index > 1) {
+  setUserData([]);
+  setIndex(index - 1);
+}
+
+Page 1 se niche nahi jaane deta
+
+Data clear kar raha hai
+
+🔹 Next Button
+setIndex(index + 1);
+
+Page increase karta hai
+
+⚠ Important Improvement:
+Abhi page change hone par API call nahi ho raha.
+Iske liye useEffect use karna chahiye.
+
+Example:
+
+useEffect(() => {
+  getData();
+}, [index]);
+1️⃣2️⃣ Important Concepts Used
+Concept	Kya kaam karta hai
+useState	State manage karta hai
+async/await	Promise handle karta hai
+axios	API call karta hai
+map()	List render karta hai
+Props	Parent → Child data
+Conditional Rendering	UI control
+Pagination	Page based data load
+Tailwind	Styling
