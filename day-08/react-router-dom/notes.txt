@@ -1,0 +1,60 @@
+Important Concepts
+Concept	                       Meaning
+BrowserRouter	       Router wrap karta hai app ko
+Routes	               Saare routes ka container
+Route	                Ek specific path define karta hai
+Link	                Navigation ke liye
+useParams()          	URL se data lene ke liye
+useNavigate()        	Programmatically redirect karne ke liye
+
+
+Kaise kaam karta hai?
+
+React Router browser ke URL ko watch karta hai aur us URL ke hisaab se component render karta hai.
+
+Example:
+
+URL	Kaunsa Component Show Hoga
+/	                Home Component
+/about	            About Component
+/contact	        Contact Component
+
+🔹 Install kaise kare?
+npm install react-router-dom
+
+🔹 Basic Example (Step-by-Step)
+
+1️⃣ Import kare
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+2️⃣ Setup kare
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+
+🔹 Navigation kaise kare?
+
+<Link> use karte hain instead of <a>
+
+import { Link } from "react-router-dom";
+
+<Link to="/about">About Page</Link>
+
+Ye page reload nahi karega.
+
+
+Example: Dynamic Route
+<Route path="/user/:id" element={<User />} />
+
+/user/101
+
+const { id } = useParams();
